@@ -1143,7 +1143,7 @@ def infer_and_score_all(save_inference=True, save_scores=True):
             os.mkdir(
                 os.path.join(
                     mu.GLOBALS.MTIST_DATASET_DIR,
-                    f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result",
+                    f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result3",
                 )
             )
         except Exception as e:
@@ -1154,7 +1154,7 @@ def infer_and_score_all(save_inference=True, save_scores=True):
             np.savetxt(
                 os.path.join(
                     mu.GLOBALS.MTIST_DATASET_DIR,
-                    f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result",
+                    f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result3",
                     f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inferred_aij_{did}.csv",
                 ),
                 inferred_aijs[key],
@@ -1165,7 +1165,7 @@ def infer_and_score_all(save_inference=True, save_scores=True):
         df_es_scores.to_csv(
             os.path.join(
                 mu.GLOBALS.MTIST_DATASET_DIR,
-                f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result",
+                f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result3",
                 f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}es_scores.csv",
             )
         )
