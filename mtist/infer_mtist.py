@@ -11,6 +11,7 @@ import xarray as xr
 # from mtist.mtist_utils import mu.GLOBALS, mu.load_dataset, mu.load_ground_truths, mu.calculate_n_datasets
 from mtist import mtist_utils as mu
 
+from tqdm import tqdm
 
 def calc_dlogydt(x, times):
     """x: an n_timepoints long column vector, from one timeseries, of one species
@@ -455,7 +456,6 @@ def infer_from_did_lasso_cv(did, debug=False):
 
             lassocv = linear_model.LassoCV(
                 cv=5,
-                normalize=False,
                 fit_intercept=True,
                 max_iter=10 ** 7,
             )
@@ -612,7 +612,6 @@ def infer_from_did_ridge_cv(did, debug=False):
 
             ridgecv = linear_model.RidgeCV(
                 cv=5,
-                normalize=False,
                 fit_intercept=True,
             )
 
@@ -769,7 +768,6 @@ def infer_from_did_elasticnet_cv(did, debug=False):
                 l1_ratio=0.5,
                 eps=1e-3,
                 cv=5,
-                normalize=False,
                 fit_intercept=True,
                 max_iter=10 ** 7,
             )
@@ -1102,7 +1100,8 @@ def infer_and_score_all(save_inference=True, save_scores=True):
     # floored_scores = {}
     inferred_aijs = {}
 
-    for fn in fns:
+    for i in tqdm(range(len(fns))):
+        fn = fns[i]
 
         # Complete the inference
         did = int(fn.split(".csv")[0].split("dataset_")[-1])
@@ -1143,7 +1142,7 @@ def infer_and_score_all(save_inference=True, save_scores=True):
             os.mkdir(
                 os.path.join(
                     mu.GLOBALS.MTIST_DATASET_DIR,
-                    f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result3",
+                    f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result",
                 )
             )
         except Exception as e:
@@ -1154,7 +1153,7 @@ def infer_and_score_all(save_inference=True, save_scores=True):
             np.savetxt(
                 os.path.join(
                     mu.GLOBALS.MTIST_DATASET_DIR,
-                    f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result3",
+                    f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result",
                     f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inferred_aij_{did}.csv",
                 ),
                 inferred_aijs[key],
@@ -1165,7 +1164,7 @@ def infer_and_score_all(save_inference=True, save_scores=True):
         df_es_scores.to_csv(
             os.path.join(
                 mu.GLOBALS.MTIST_DATASET_DIR,
-                f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result3",
+                f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}inference_result",
                 f"{INFERENCE_DEFAULTS.INFERENCE_PREFIX}es_scores.csv",
             )
         )

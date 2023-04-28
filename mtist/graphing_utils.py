@@ -49,6 +49,7 @@ def savefig(fig, filename, ft=None):
     if ft is None:
         ft = "jpg"
     fig.savefig("{}.{}".format(filename, ft), dpi=300, bbox_inches="tight")
+    plt.close()
 
 
 def score_heatmap(meta, df_es_scores, plot_floored=True, plot_low_seq_depth=True, **kwargs):
