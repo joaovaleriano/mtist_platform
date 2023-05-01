@@ -455,7 +455,7 @@ def infer_from_did_lasso_cv(did, debug=False):
 
             lassocv = linear_model.LassoCV(
                 cv=5,
-                normalize=False,
+                # normalize=False,
                 fit_intercept=True,
                 max_iter=10 ** 7,
             )
@@ -612,7 +612,7 @@ def infer_from_did_ridge_cv(did, debug=False):
 
             ridgecv = linear_model.RidgeCV(
                 cv=5,
-                normalize=False,
+                # normalize=False,
                 fit_intercept=True,
             )
 
@@ -769,7 +769,7 @@ def infer_from_did_elasticnet_cv(did, debug=False):
                 l1_ratio=0.5,
                 eps=1e-3,
                 cv=5,
-                normalize=False,
+                # normalize=False,
                 fit_intercept=True,
                 max_iter=10 ** 7,
             )

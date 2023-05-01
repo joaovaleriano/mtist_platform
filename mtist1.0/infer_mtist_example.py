@@ -13,10 +13,10 @@ from matplotlib import pyplot as plt
 ################################
 
 inference_names = [
-    "default",
-    "ridge_CV",
-    "lasso_CV",
-    "elasticnet_CV",
+    "default_joao",
+    "ridge_CV_joao",
+    "lasso_CV_joao",
+    "elasticnet_CV_joao",
 ]
 
 prefixes = [f"{name}_" for name in inference_names]
